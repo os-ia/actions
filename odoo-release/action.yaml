@@ -1,5 +1,9 @@
 name: "Odoo Release"
 description: "Create a new release from the manifest"
+outputs:
+  new-version:
+    description: "New release version. Can be null"
+    value: ${{ steps.compare-versions.outputs.new-version }}
 runs:
   using: "composite"
   steps:
