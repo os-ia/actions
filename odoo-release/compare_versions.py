@@ -12,16 +12,16 @@ from typing import Any
 
 
 def get_releases_data() -> Any:
-    url = f'https://api.github.com/repos/{os.getenv("GITHUB_REPOSITORY")}/releases'
+    url = f'https://api.github.com/repos/{os.environ["GITHUB_REPOSITORY"]}/releases'
     req = urllib.request.Request(url)
     req.add_header('Accept', 'application/vnd.github.v3+json')
-    req.add_header('Authorization', f'Bearer {os.getenv("GITHUB_TOKEN")}')
+    req.add_header('Authorization', f'Bearer {os.environ["GITHUB_TOKEN"]}')
     with urllib.request.urlopen(req) as f:
         return json.loads(f.read().decode('utf-8'))
 
 
 def get_current_version_from_manifest() -> Tuple[int, ...]:
-    with open(f'{os.getenv("GITHUB_WORKSPACE")}/__manifest__.py', 'r') as f:
+    with open(f'{os.environ["GITHUB_WORKSPACE"]}/__manifest__.py', 'r') as f:
         return tuple(map(int, literal_eval(f.read())['version'].split('.')))
 
 
