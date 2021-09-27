@@ -61,9 +61,8 @@ def get_new_version(current_version: Tuple[int, ...], latest_release: str) -> Op
 
 
 if __name__ == '__main__':
-    releases_data = get_releases_data()
     current_version = get_current_version_from_manifest()
-    latest_release = get_latest_release_from_speficic_odoo_version(releases_data, current_version)
+    latest_release = get_latest_release_from_speficic_odoo_version(get_releases_data(), current_version)
     new_version = get_new_version(current_version, latest_release)
     if new_version is not None:
         os.system(f'echo "::set-output name=new-version::{new_version}"')
