@@ -3,12 +3,6 @@ description: "Create a new release from the manifest"
 runs:
   using: "composite"
   steps:
-    - id: setup-python
-      name: Setup Python 3.8
-      uses: actions/setup-python@v2
-      with:
-        python-version: "3.8"
-
     - id: compare-versions
       name: Compare current version with latest release
       run: python3 ${{ github.action_path }}/compare_versions.py
